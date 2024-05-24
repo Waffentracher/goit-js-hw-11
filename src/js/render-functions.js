@@ -61,7 +61,15 @@ function addLoader() {
   const loader = document.createElement('div');
   loader.textContent = 'Loading images...';
   loader.classList.add('loader');
+  loader.classList.remove('hidden');
   gallery.appendChild(loader);
 }
 
-export { renderImages, showMessage, addLoader };
+function removeLoader() {
+  const loader = document.querySelector('.loader');
+  if (loader) {
+    loader.remove();
+  }
+}
+
+export { renderImages, showMessage, addLoader, removeLoader };

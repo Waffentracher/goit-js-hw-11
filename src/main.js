@@ -1,7 +1,12 @@
 // main.js
 
 import { fetchImages } from './js/pixabay-api.js';
-import { renderImages, showMessage, addLoader } from './js/render-functions.js';
+import {
+  renderImages,
+  showMessage,
+  addLoader,
+  removeLoader,
+} from './js/render-functions.js';
 
 let page = 1;
 let queryValue = '';
@@ -31,6 +36,7 @@ async function handleSubmit(event) {
 
   try {
     const images = await fetchImages(queryValue, page);
+    removeLoader();
 
     if (images.length === 0) {
       showMessage(
@@ -43,6 +49,7 @@ async function handleSubmit(event) {
 
     document.querySelector('.load-more-button').style.display = 'block';
   } catch (error) {
+    removeLoader();
     console.error('Error processing search:', error);
     showMessage(
       'An error occurred while processing your search. Please try again later.'
@@ -52,9 +59,11 @@ async function handleSubmit(event) {
 
 async function handleLoadMore() {
   page++;
+  addLoader();
 
   try {
     const images = await fetchImages(queryValue, page);
+    removeLoader();
 
     if (images.length === 0) {
       showMessage(
@@ -76,6 +85,7 @@ async function handleLoadMore() {
       behavior: 'smooth',
     });
   } catch (error) {
+    removeLoader();
     console.error('Error loading more images:', error);
     showMessage(
       'An error occurred while loading more images. Please try again later.'

@@ -49,12 +49,12 @@ button[type="submit"]:hover {
     padding: 5px;
 }
 
-.loader {
+/* .loader {
     display: none;
     text-align: center;
     margin-top: 20px;
     font-size: 18px;
-}
+} */
 .load-more-button {
     background-color: #4caf50;
     color: #fff;
@@ -71,4 +71,19 @@ button[type="submit"]:hover {
 
 .load-more-button:hover {
     background-color: #45a049;
+}
+/* gallery.css */
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #555;
+    padding: 20px;
+}
+
+.hidden {
+    display: none;
 }
