@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Search</title>
-    <!-- Підключення стилів iziToast -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
-    <!-- Підключення стилів SimpleLightbox -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simplelightbox.min.css">
-    <!-- Підключення стилів css-loader -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css">
-    <!-- Підключення стилів вашого власного файлу з галереєю -->
     
-  <script type="module" crossorigin src="/Waffentracher/goit-js-hw-11/commonHelpers.js"></script>
-  <link rel="modulepreload" crossorigin href="/Waffentracher/goit-js-hw-11/assets/vendor-870f0eb5.js">
-  <link rel="stylesheet" href="/Waffentracher/goit-js-hw-11/assets/vendor-ef539242.css">
-  <link rel="stylesheet" href="/Waffentracher/goit-js-hw-11/assets/index-44305304.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simplelightbox.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css">
+    
+    
+  <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-58e78301.js">
+  <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-ef539242.css">
+  <link rel="stylesheet" href="/goit-js-hw-12/assets/index-b0f64302.css">
 </head>
 
 <body>
@@ -26,13 +26,16 @@
         <input type="text" id="query" placeholder="Enter your search term" required>
         <button type="submit">Search</button>
     </form>
-    
+
     <div class="gallery"></div>
+    <button class="load-more-button" style="display: none;">Load more</button>
     <span class="loader"></span>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     
     
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     
 </body>
 
