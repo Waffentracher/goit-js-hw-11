@@ -1,14 +1,17 @@
+// render-functions.js
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-function renderImages(images) {
+function renderImages(images, append = false) {
   const gallery = document.querySelector('.gallery');
+  const lightbox = new SimpleLightbox('.gallery a', {});
 
-  // Очищення вмісту галереї перед додаванням нових карток
-  gallery.innerHTML = '';
+  if (!append) {
+    gallery.innerHTML = '';
+  }
 
   images.forEach(image => {
-    // Створення елементів для кожного зображення
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -42,7 +45,7 @@ function renderImages(images) {
     gallery.appendChild(card);
   });
 
-  const lightbox = new SimpleLightbox('.gallery a', {});
+  lightbox.refresh();
 }
 
 function showMessage(message, type = 'error') {
@@ -55,7 +58,6 @@ function showMessage(message, type = 'error') {
 
 function addLoader() {
   const gallery = document.querySelector('.gallery');
-  // Створення елемента .loader перед початком HTTP-запиту
   const loader = document.createElement('div');
   loader.textContent = 'Loading images...';
   loader.classList.add('loader');

@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Search</title>
-    <!-- Підключення стилів iziToast -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
-    <!-- Підключення стилів SimpleLightbox -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simplelightbox.min.css">
-    <!-- Підключення стилів css-loader -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css">
-    <!-- Підключення стилів вашого власного файлу з галереєю -->
+    
     <link rel="stylesheet" href="./css/gallery.css" />
 </head>
 
@@ -22,13 +22,16 @@
         <input type="text" id="query" placeholder="Enter your search term" required>
         <button type="submit">Search</button>
     </form>
-    
+
     <div class="gallery"></div>
+    <button class="load-more-button" style="display: none;">Load more</button>
     <span class="loader"></span>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <script src="./js/pixabay-api.js" type="module"></script>
     <script src="./js/render-functions.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="./main.js" type="module"></script>
 </body>
 
