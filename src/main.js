@@ -1,5 +1,3 @@
-// main.js
-
 import { fetchImages } from './js/pixabay-api.js';
 import {
   renderImages,
@@ -15,9 +13,7 @@ window.addEventListener('DOMContentLoaded', event => {
   const form = document.querySelector('form');
   form.addEventListener('submit', handleSubmit);
 
-  const gallery = document.querySelector('.gallery');
   const loadMoreButton = document.querySelector('.load-more-button');
-
   loadMoreButton.addEventListener('click', handleLoadMore);
 });
 
@@ -33,27 +29,28 @@ async function handleSubmit(event) {
   }
 
   addLoader();
+  clearGallery();
 
   try {
     const images = await fetchImages(queryValue, page);
-    removeLoader();
 
     if (images.length === 0) {
       showMessage(
         'Sorry, there are no images matching your search query. Please try again.'
       );
+      document.querySelector('.load-more-button').style.display = 'none';
       return;
     }
 
     renderImages(images);
-
     document.querySelector('.load-more-button').style.display = 'block';
   } catch (error) {
-    removeLoader();
     console.error('Error processing search:', error);
     showMessage(
       'An error occurred while processing your search. Please try again later.'
     );
+  } finally {
+    removeLoader();
   }
 }
 
@@ -63,7 +60,6 @@ async function handleLoadMore() {
 
   try {
     const images = await fetchImages(queryValue, page);
-    removeLoader();
 
     if (images.length === 0) {
       showMessage(
@@ -79,16 +75,21 @@ async function handleLoadMore() {
     const cardHeight = document
       .querySelector('.card')
       .getBoundingClientRect().height;
-
     window.scrollBy({
       top: cardHeight * 2,
       behavior: 'smooth',
     });
   } catch (error) {
-    removeLoader();
     console.error('Error loading more images:', error);
     showMessage(
       'An error occurred while loading more images. Please try again later.'
     );
+  } finally {
+    removeLoader();
   }
+}
+
+function clearGallery() {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
 }

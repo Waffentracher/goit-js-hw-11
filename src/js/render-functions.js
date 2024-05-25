@@ -1,5 +1,3 @@
-// render-functions.js
-
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
@@ -57,19 +55,14 @@ function showMessage(message, type = 'error') {
 }
 
 function addLoader() {
-  const gallery = document.querySelector('.gallery');
-  const loader = document.createElement('div');
-  loader.textContent = 'Loading images...';
-  loader.classList.add('loader');
+  const loader = document.querySelector('.loader');
+  loader.textContent = 'Loading...';
   loader.classList.remove('hidden');
-  gallery.appendChild(loader);
 }
 
 function removeLoader() {
   const loader = document.querySelector('.loader');
-  if (loader) {
-    loader.remove();
-  }
+  loader.classList.add('hidden');
 }
 
 export { renderImages, showMessage, addLoader, removeLoader };
