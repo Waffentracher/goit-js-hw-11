@@ -1,5 +1,3 @@
-// render-functions.js
-
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
@@ -46,14 +44,6 @@ function renderImages(images) {
   lightbox.refresh();
 }
 
-function showMessage(message, type = 'error') {
-  iziToast[type]({
-    title: '',
-    message: message,
-    position: 'topRight',
-  });
-}
-
 function addLoader() {
   const loader = document.querySelector('.loader');
   loader.textContent = 'Loading...';
@@ -65,4 +55,4 @@ function removeLoader() {
   loader.classList.add('hidden');
 }
 
-export { renderImages, showMessage, addLoader, removeLoader };
+export { renderImages, addLoader, removeLoader };

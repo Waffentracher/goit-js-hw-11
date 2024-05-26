@@ -1,7 +1,6 @@
 import { fetchImages } from './js/pixabay-api.js';
 import {
   renderImages,
-  showMessage,
   addLoader,
   removeLoader,
 } from './js/render-functions.js';
@@ -46,8 +45,6 @@ async function handleSubmit(event) {
     }
   } catch (error) {
     console.error('Error processing search:', error);
-    removeLoader();
-    isSearching = false;
   } finally {
     removeLoader();
     isSearching = false;
