@@ -46,11 +46,6 @@ async function handleSubmit(event) {
     } else {
       renderImages(images);
     }
-  } catch (error) {
-    console.error('Error processing search:', error);
-    showMessage(
-      'An error occurred while processing your search. Please try again later.'
-    );
   } finally {
     removeLoader();
     isSearching = false;
