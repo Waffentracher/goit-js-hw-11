@@ -1,11 +1,15 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
-function renderImages(images) {
+function renderImages(images, append = false) {
   const gallery = document.querySelector('.gallery');
   const lightbox = new SimpleLightbox('.gallery a', {});
 
-  gallery.innerHTML = '';
+  if (!append) {
+    gallery.innerHTML = '';
+  }
 
   images.forEach(image => {
     const card = document.createElement('div');
@@ -44,6 +48,14 @@ function renderImages(images) {
   lightbox.refresh();
 }
 
+function showMessage(message, type = 'error') {
+  iziToast[type]({
+    title: '',
+    message: message,
+    position: 'topRight',
+  });
+}
+
 function addLoader() {
   const loader = document.querySelector('.loader');
   loader.textContent = 'Loading...';
@@ -55,4 +67,4 @@ function removeLoader() {
   loader.classList.add('hidden');
 }
 
-export { renderImages, addLoader, removeLoader };
+export { renderImages, showMessage, addLoader, removeLoader };
