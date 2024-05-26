@@ -2,45 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Search</title>
-    
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simple-lightbox.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css"
-    />
+    <title>Gallery</title>
+    <link rel="stylesheet" href="./css/styles.css" />
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-58e78301.js">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-ef539242.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-f272b7ae.css">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-7659544d.js">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-a51daae5.css">
   </head>
-
   <body>
-    <form id="search-form">
+    <form class="form">
       <input
         type="text"
-        id="query"
-        placeholder="Enter your search term"
+        name="search"
+        class="search-field"
+        placeholder="Search images..."
         required
       />
-      <button type="submit">Search</button>
+      <button type="submit" class="search-btn">Search</button>
     </form>
+    <ul class="gallery"></ul>
+    <span class="loader is-hidden"></span>
 
-    <div class="gallery"></div>
-    <div class="loader hidden"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
-    
     
   </body>
 </html>
