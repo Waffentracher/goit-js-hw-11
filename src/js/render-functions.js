@@ -1,11 +1,15 @@
+// render-functions.js
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-function renderImages(images) {
+function renderImages(images, append = false) {
   const gallery = document.querySelector('.gallery');
   const lightbox = new SimpleLightbox('.gallery a', {});
 
-  gallery.innerHTML = '';
+  if (!append) {
+    gallery.innerHTML = '';
+  }
 
   images.forEach(image => {
     const card = document.createElement('div');
