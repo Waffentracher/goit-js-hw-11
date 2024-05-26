@@ -17,6 +17,7 @@ async function handleSubmit(event) {
   event.preventDefault();
 
   queryValue = event.target.elements.query.value.trim();
+  console.log('Query:', queryValue);
 
   if (!queryValue) {
     showMessage('Please enter a search query.', 'warning');
@@ -28,6 +29,7 @@ async function handleSubmit(event) {
 
   try {
     const images = await fetchImages(queryValue);
+    console.log('Fetched images:', images);
 
     if (images.length === 0) {
       showMessage(
