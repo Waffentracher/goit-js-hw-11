@@ -60,9 +60,7 @@ button[type="submit"]:hover {
 .card p {
     margin: 5px 0;
 }
-/* styles.css */
 
-/* Розмір вікна загрузки */
 .loader {
     border: 8px solid #f3f3f3;
     border-radius: 50%;
@@ -72,7 +70,7 @@ button[type="submit"]:hover {
     animation: spin 1s linear infinite;
     margin: 20px auto;
     display: none;
-    /* початково ховаємо вікно загрузки */
+    
 }
 
 @keyframes spin {
