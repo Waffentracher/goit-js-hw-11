@@ -1,5 +1,3 @@
-// main.js
-
 import { fetchImages } from './js/pixabay-api.js';
 import {
   renderImages,
@@ -28,7 +26,7 @@ async function handleSubmit(event) {
   queryValue = event.target.elements.query.value.trim();
 
   if (!queryValue) {
-    showMessage('Please enter a search query.', 'warning');
+    console.error('Please enter a search query.');
     isSearching = false;
     return;
   }
@@ -40,7 +38,7 @@ async function handleSubmit(event) {
     const images = await fetchImages(queryValue);
 
     if (images.length === 0) {
-      showMessage(
+      console.warn(
         'Sorry, there are no images matching your search query. Please try again.'
       );
     } else {
@@ -48,7 +46,9 @@ async function handleSubmit(event) {
     }
   } catch (error) {
     console.error('Error processing search:', error);
-
+    removeLoader();
+    isSearching = false;
+  } finally {
     removeLoader();
     isSearching = false;
   }
