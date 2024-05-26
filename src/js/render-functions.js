@@ -64,6 +64,8 @@ function addLoader() {
   if (loader) {
     loader.textContent = 'Loading...';
     loader.classList.remove('hidden');
+  } else {
+    console.error('Loader element not found.');
   }
 }
 
@@ -71,6 +73,8 @@ function removeLoader() {
   const loader = document.querySelector('.loader');
   if (loader) {
     loader.classList.add('hidden');
+  } else {
+    console.error('Loader element not found.');
   }
 }
 

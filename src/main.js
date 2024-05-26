@@ -10,6 +10,8 @@ window.addEventListener('DOMContentLoaded', event => {
   const form = document.querySelector('form');
   if (form) {
     form.addEventListener('submit', handleSubmit);
+  } else {
+    console.error('Form element not found.');
   }
 });
 
@@ -57,5 +59,7 @@ function clearGallery() {
   const gallery = document.querySelector('.gallery');
   if (gallery) {
     gallery.innerHTML = '';
+  } else {
+    console.error('Gallery element not found.');
   }
 }
