@@ -1,46 +1,58 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import { searchImages } from './js/pixabay-api.js';
-import { renderImages, showErrorMessage } from './js/render-functions.js';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('search-form');
-  const gallery = document.getElementById('gallery');
-  const loader = document.getElementById('loader');
+import { searchPhotos } from "./js/pixabay-api.js";
+import { createGalleryMarkup } from "./js/render-functions.js";
 
-  const lightbox = new SimpleLightbox('.gallery a');
+const galleryEl = document.querySelector('.gallery');
+const searchField = document.querySelector('.search-field');
+const searchForm = document.querySelector('.form');
+const loaderEl = document.querySelector('.loader');
 
-  form.addEventListener('submit', async event => {
+function onSearchFormSubmit(event) {
     event.preventDefault();
 
-    const queryValue = event.target.elements.query.value.trim();
+    const searchQuery = searchField.value.trim();
 
-    if (!queryValue) {
-      iziToast.error({
-        title: 'Помилка',
-        message: 'Будь ласка, введіть пошуковий запит.',
-      });
-      return;
+    if (searchQuery === '') {
+        galleryEl.innerHTML = '';
+        event.target.reset();
+        iziToast.error({
+            title: 'Error',
+            message: 'Illegal operation',
+            position: 'topRight',
+            color: '#EF4040',
+        });
+        return;
     }
+    galleryEl.innerHTML = '';
+    loaderEl.classList.remove('is-hidden');
 
-    loader.style.display = 'block';
+    searchPhotos(searchQuery)
+        .then(imagesData => {
+            loaderEl.classList.add('is-hidden');
 
-    try {
-      const images = await searchImages(queryValue);
-      if (images.length === 0) {
-        showErrorMessage();
-      } else {
-        renderImages(images);
-      }
-    } catch (error) {
-      console.error('Помилка отримання зображень:', error);
-      iziToast.error({
-        title: 'Помилка',
-        message:
-          'Не вдалося отримати зображення. Будь ласка, спробуйте пізніше.',
-      });
-    } finally {
-      loader.style.display = 'none';
-    }
-  });
-});
+            if (imagesData.totalHits === 0) {
+                iziToast.show({
+                    message:
+                        'Sorry, there are no images matching your search query. Please try again!',
+                    position: 'topRight',
+                    color: '#EF4040',
+                });
+                return;
+            }
+            galleryEl.innerHTML = createGalleryMarkup(imagesData.hits);
+
+            const lightbox = new SimpleLightbox('.gallery a');
+            lightbox.refresh();
+        })
+        .catch(error => console.log(error))
+        .finally(() => {
+            event.target.reset();
+            loaderEl.classList.add('is-hidden');
+        });
+}
+
+searchForm.addEventListener('submit', onSearchFormSubmit);

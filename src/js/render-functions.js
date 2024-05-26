@@ -1,35 +1,31 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
-export function renderImages(images) {
-  const gallery = document.getElementById('gallery');
-  const lightbox = new SimpleLightbox('.gallery a');
-
-  const html = images
-    .map(
-      image => `
-    <div class="card">
-      <a href="${image.largeImageURL}" title="${image.tags}" data-lightbox="gallery-item">
-        <img src="${image.webformatURL}" alt="${image.tags}">
-      </a>
-      <div class="card-content">
-        <p>Likes: ${image.likes}</p>
-        <p>Views: ${image.views}</p>
-        <p>Comments: ${image.comments}</p>
-        <p>Downloads: ${image.downloads}</p>
-      </div>
-    </div>
-  `
+export const createGalleryMarkup = (images) => {
+    return images.map(
+        ({
+            webformatURL, largeImageURL, tags, likes, views, comments, downloads
+        }) => `
+            <li class="item-list">
+                <a href="${largeImageURL}" class="item-list-link">
+                    <img class="item-list-img" src="${webformatURL}" alt="${tags}">
+                </a>
+                <div class='markup-info'>
+                    <div class="item-list-info-text">
+                        <h3 class="item-list-title">Likes</h3>
+                        <p class="item-list-text">${likes}</p>
+                    </div>
+                    <div class="item-list-info-text">
+                        <h3 class="item-list-title">Views</h3>
+                        <p class="item-list-text">${views}</p>
+                    </div>
+                    <div class="item-list-info-text">
+                        <h3 class="item-list-title">Comments</h3>
+                        <p class="item-list-text">${comments}</p>
+                    </div>
+                    <div class="item-list-info-text">
+                        <h3 class="item-list-title">Downloads</h3>
+                        <p class="item-list-text">${downloads}</p>
+                    </div>
+                </div>
+            </li>`
     )
-    .join('');
-  gallery.innerHTML = html;
-
-  lightbox.refresh();
-}
-
-export function showErrorMessage() {
-  iziToast.info({
-    title: 'Info',
-    message: 'No images found for your query. Please try again!',
-  });
+        .join('');
 }
