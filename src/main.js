@@ -5,17 +5,17 @@ import { renderImages, showErrorMessage } from './js/render-functions.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('search-form');
-  const searchInput = document.getElementById('search-input');
   const gallery = document.getElementById('gallery');
   const loader = document.getElementById('loader');
 
   const lightbox = new SimpleLightbox('.gallery a');
 
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
 
-    // Check if searchInput exists
-    if (!searchInput || !searchInput.value) {
+    const queryValue = event.target.elements.query.value.trim();
+
+    if (!queryValue) {
       iziToast.error({
         title: 'Помилка',
         message: 'Будь ласка, введіть пошуковий запит.',
@@ -23,12 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const searchTerm = searchInput.value.trim();
-
     loader.style.display = 'block';
 
     try {
-      const images = await searchImages(searchTerm);
+      const images = await searchImages(queryValue);
       if (images.length === 0) {
         showErrorMessage();
       } else {
