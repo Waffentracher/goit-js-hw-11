@@ -6,10 +6,7 @@ import {
   removeLoader,
 } from './js/render-functions.js';
 
-let queryValue = '';
-let isSearching = false;
-
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', event => {
   const form = document.querySelector('form');
   form.addEventListener('submit', handleSubmit);
 });
@@ -17,17 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 async function handleSubmit(event) {
   event.preventDefault();
 
-  if (isSearching) {
-    return;
-  }
-
-  isSearching = true;
-
-  queryValue = event.target.elements.query.value.trim();
+  const queryValue = event.target.elements.query.value.trim();
 
   if (!queryValue) {
     showMessage('Please enter a search query.', 'warning');
-    isSearching = false;
     return;
   }
 
@@ -41,12 +31,17 @@ async function handleSubmit(event) {
       showMessage(
         'Sorry, there are no images matching your search query. Please try again.'
       );
-    } else {
-      renderImages(images);
+      return;
     }
+
+    renderImages(images);
+  } catch (error) {
+    console.error('Error processing search:', error);
+    showMessage(
+      'An error occurred while processing your search. Please try again later.'
+    );
   } finally {
     removeLoader();
-    isSearching = false;
   }
 }
 
