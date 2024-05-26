@@ -1,124 +1,30 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Пошук зображень</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/simplelightbox/dist/simple-lightbox.min.css"
-    />
-    <style>
-      .container {
-        max-width: auto;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-
-      input[type='text'] {
-        width: 300px;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      button[type='submit'] {
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      button[type='submit']:hover {
-        background-color: #45a049;
-      }
-
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-      }
-
-      .card {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        overflow: hidden;
-      }
-
-      .card img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 5px 5px 0 0;
-      }
-
-      .card-content {
-        padding: 10px;
-      }
-
-      .card p {
-        margin: 5px 0;
-      }
-
-      .loader {
-        border: 8px solid #f3f3f3;
-        border-radius: 50%;
-        border-top: 8px solid #3498db;
-        width: 60px;
-        height: 60px;
-        animation: spin 1s linear infinite;
-        margin: 20px auto;
-        display: none;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-    <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-870f0eb5.js">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-ef539242.css">
+    <title>Gallery</title>
+    
+    <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-0fc460d7.js">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-4b066c51.css">
+    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-b1c1633e.css">
   </head>
   <body>
-    <div class="container">
-      <h1>Пошук зображень</h1>
-      <form id="search-form">
-        <input
-          type="text"
-          id="search-input"
-          name="query"
-          placeholder="Введіть пошуковий запит..."
-        />
-        <button type="submit">Шукати</button>
-      </form>
-      <div id="loader" class="loader"></div>
+    <form class="form">
+      <input
+        type="text"
+        name="search"
+        class="search-field"
+        placeholder="Search images..."
+        required
+      />
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+    <ul class="gallery"></ul>
+    <span class="loader is-hidden"></span>
 
-      <div id="gallery" class="gallery"></div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simplelightbox/dist/simple-lightbox.min.js"></script>
     
   </body>
 </html>
