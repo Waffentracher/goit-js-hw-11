@@ -6,6 +6,8 @@ import {
   removeLoader,
 } from './js/render-functions.js';
 
+let queryValue = '';
+
 window.addEventListener('DOMContentLoaded', event => {
   const form = document.querySelector('form');
   form.addEventListener('submit', handleSubmit);
@@ -14,7 +16,7 @@ window.addEventListener('DOMContentLoaded', event => {
 async function handleSubmit(event) {
   event.preventDefault();
 
-  const queryValue = event.target.elements.query.value.trim();
+  queryValue = event.target.elements.query.value.trim();
 
   if (!queryValue) {
     showMessage('Please enter a search query.', 'warning');
@@ -36,7 +38,7 @@ async function handleSubmit(event) {
 
     renderImages(images);
   } catch (error) {
-    showMessage('An ', 'error');
+    console.error('Error processing search:', error);
   } finally {
     removeLoader();
   }
