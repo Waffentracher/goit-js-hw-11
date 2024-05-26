@@ -1,3 +1,11 @@
+/* styles.css */
+
+.container {
+    max-width: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -20,6 +28,7 @@ button[type="submit"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button[type="submit"]:hover {
@@ -42,37 +51,37 @@ button[type="submit"]:hover {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 5px 5px 0 0;
 }
 
-.card span {
-    display: block;
-    padding: 5px;
+.card-content {
+    padding: 10px;
 }
 
-
-.load-more-button {
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin: 0 auto;
-    display: block;
-    
+.card p {
+    margin: 5px 0;
 }
+/* styles.css */
 
-.load-more-button:hover {
-    background-color: #45a049;
-}
-
-.hidden {
-    display: none;
-}
-
+/* Розмір вікна загрузки */
 .loader {
-    text-align: center;
-    font-size: 20px;
-    margin: 20px 0;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+    /* початково ховаємо вікно загрузки */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

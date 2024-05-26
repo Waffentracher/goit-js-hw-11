@@ -1,50 +1,44 @@
-import { fetchImages } from './js/pixabay-api.js';
-import {
-  renderImages,
-  showMessage,
-  addLoader,
-  removeLoader,
-} from './js/render-functions.js';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let queryValue = '';
+import { searchImages } from './js/pixabay-api.js';
+import { renderImages, showErrorMessage } from './js/render-functions.js';
 
-window.addEventListener('DOMContentLoaded', event => {
-  const form = document.querySelector('form');
-  form.addEventListener('submit', handleSubmit);
-});
+const form = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+const gallery = document.getElementById('gallery');
+const loader = document.getElementById('loader');
 
-async function handleSubmit(event) {
-  event.preventDefault();
+const lightbox = new SimpleLightbox('.gallery a');
 
-  queryValue = event.target.elements.query.value.trim();
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const searchTerm = searchInput.value.trim();
 
-  if (!queryValue) {
-    showMessage('Please enter a search query.', 'warning');
+  if (!searchTerm) {
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Будь ласка, введіть пошуковий запит.',
+    });
     return;
   }
 
-  addLoader();
-  clearGallery();
+  loader.style.display = 'block';
 
   try {
-    const images = await fetchImages(queryValue);
-
+    const images = await searchImages(searchTerm);
     if (images.length === 0) {
-      showMessage(
-        'Sorry, there are no images matching your search query. Please try again.'
-      );
-      return;
+      showErrorMessage();
+    } else {
+      renderImages(images);
     }
-
-    renderImages(images);
   } catch (error) {
-    console.error('Error processing search:', error);
+    console.error('Помилка отримання зображень:', error);
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося отримати зображення. Будь ласка, спробуйте пізніше.',
+    });
   } finally {
-    removeLoader();
+    loader.style.display = 'none';
   }
-}
-
-function clearGallery() {
-  const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
-}
+});
