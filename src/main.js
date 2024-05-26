@@ -36,7 +36,7 @@ async function handleSubmit(event) {
 
     renderImages(images);
   } catch (error) {
-    showMessage('An error occurred while fetching the images.', 'error');
+    showMessage('An ', 'error');
   } finally {
     removeLoader();
   }
