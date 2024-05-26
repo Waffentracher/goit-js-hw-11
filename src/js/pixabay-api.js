@@ -1,7 +1,7 @@
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '43997901-59e2ef8a5969ad3162d77619c';
 
-export const searchPhotos = query => {
+export const fetchImages = async query => {
   const searchParams = new URLSearchParams({
     key: API_KEY,
     q: query,
@@ -10,10 +10,10 @@ export const searchPhotos = query => {
     safesearch: true,
   });
 
-  return fetch(`${BASE_URL}?${searchParams}`).then(response => {
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    return response.json();
-  });
+  const response = await fetch(`${BASE_URL}?${searchParams}`);
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const data = await response.json();
+  return data.hits;
 };

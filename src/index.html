@@ -2,25 +2,102 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gallery</title>
-    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Image Search</title>
+    <link rel="stylesheet" href="./css/gallery.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simple-lightbox.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css"
+    />
   </head>
   <body>
-    <form class="form">
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      input[type='text'] {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button[type='submit'] {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button[type='submit']:hover {
+        background-color: #45a049;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .card span {
+        display: block;
+        padding: 5px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .loader {
+        text-align: center;
+        font-size: 20px;
+        margin: 20px 0;
+      }
+    </style>
+    <form id="search-form">
       <input
         type="text"
-        name="search"
-        class="search-field"
-        placeholder="Search images..."
+        id="query"
+        placeholder="Enter your search term"
         required
       />
-      <button type="submit" class="search-btn">Search</button>
+      <button type="submit">Search</button>
     </form>
-    <ul class="gallery"></ul>
-    <span class="loader is-hidden"></span>
 
-    <script type="module" src="./main.js" defer></script>
+    <div class="gallery"></div>
+    <div class="loader hidden"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/pixabay-api.js" type="module"></script>
+    <script src="./js/render-functions.js" type="module"></script>
+    <script src="./main.js" type="module"></script>
   </body>
 </html>

@@ -1,58 +1,48 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
+import { fetchImages } from './js/pixabay-api.js';
+import {
+  renderImages,
+  showMessage,
+  addLoader,
+  removeLoader,
+} from './js/render-functions.js';
 
-import { searchPhotos } from './js/pixabay-api.js';
-import { createGalleryMarkup } from './js/render-functions.js';
+window.addEventListener('DOMContentLoaded', event => {
+  const form = document.querySelector('form');
+  form.addEventListener('submit', handleSubmit);
+});
 
-const galleryEl = document.querySelector('.gallery');
-const searchField = document.querySelector('.search-field');
-const searchForm = document.querySelector('.form');
-const loaderEl = document.querySelector('.loader');
-
-function onSearchFormSubmit(event) {
+async function handleSubmit(event) {
   event.preventDefault();
 
-  const searchQuery = searchField.value.trim();
+  const queryValue = event.target.elements.query.value.trim();
 
-  if (searchQuery === '') {
-    galleryEl.innerHTML = '';
-    event.target.reset();
-    iziToast.error({
-      title: 'Error',
-      message: 'Illegal operation',
-      position: 'topRight',
-      color: '#EF4040',
-    });
+  if (!queryValue) {
+    showMessage('Please enter a search query.', 'warning');
     return;
   }
-  galleryEl.innerHTML = '';
-  loaderEl.classList.remove('is-hidden');
 
-  searchPhotos(searchQuery)
-    .then(imagesData => {
-      loaderEl.classList.add('is-hidden');
+  addLoader();
+  clearGallery();
 
-      if (imagesData.totalHits === 0) {
-        iziToast.show({
-          message:
-            'Sorry, there are no images matching your search query. Please try again!',
-          position: 'topRight',
-          color: '#EF4040',
-        });
-        return;
-      }
-      galleryEl.innerHTML = createGalleryMarkup(imagesData.hits);
+  try {
+    const images = await fetchImages(queryValue);
 
-      const lightbox = new SimpleLightbox('.gallery a');
-      lightbox.refresh();
-    })
-    .catch(error => console.log(error))
-    .finally(() => {
-      event.target.reset();
-      loaderEl.classList.add('is-hidden');
-    });
+    if (images.length === 0) {
+      showMessage(
+        'Sorry, there are no images matching your search query. Please try again.'
+      );
+      return;
+    }
+
+    renderImages(images);
+  } catch (error) {
+    showMessage('An error occurred while fetching the images.', 'error');
+  } finally {
+    removeLoader();
+  }
 }
 
-searchForm.addEventListener('submit', onSearchFormSubmit);
+function clearGallery() {
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
+}
