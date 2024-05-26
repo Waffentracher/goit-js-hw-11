@@ -7,6 +7,7 @@ import {
 } from './js/render-functions.js';
 
 let queryValue = '';
+let isSearching = false;
 
 window.addEventListener('DOMContentLoaded', event => {
   const form = document.querySelector('form');
@@ -16,10 +17,17 @@ window.addEventListener('DOMContentLoaded', event => {
 async function handleSubmit(event) {
   event.preventDefault();
 
+  if (isSearching) {
+    return;
+  }
+
+  isSearching = true;
+
   queryValue = event.target.elements.query.value.trim();
 
   if (!queryValue) {
     showMessage('Please enter a search query.', 'warning');
+    isSearching = false;
     return;
   }
 
@@ -33,10 +41,9 @@ async function handleSubmit(event) {
       showMessage(
         'Sorry, there are no images matching your search query. Please try again.'
       );
-      return;
+    } else {
+      renderImages(images);
     }
-
-    renderImages(images);
   } catch (error) {
     console.error('Error processing search:', error);
     showMessage(
@@ -44,6 +51,7 @@ async function handleSubmit(event) {
     );
   } finally {
     removeLoader();
+    isSearching = false;
   }
 }
 
