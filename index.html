@@ -1,108 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Search</title>
+    <title>Пошук зображень</title>
     
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+      href="https://cdn.jsdelivr.net/npm/izitoast/dist/css/iziToast.min.css"
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simple-lightbox.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css"
+      href="https://cdn.jsdelivr.net/npm/simplelightbox/dist/simple-lightbox.min.css"
     />
     <script type="module" crossorigin src="/goit-js-hw-12/commonHelpers.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-58e78301.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-12/assets/vendor-870f0eb5.js">
     <link rel="stylesheet" href="/goit-js-hw-12/assets/vendor-ef539242.css">
-    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-f272b7ae.css">
+    <link rel="stylesheet" href="/goit-js-hw-12/assets/index-bb644aaf.css">
   </head>
-
   <body>
-    <style>
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-      }
+    <div class="container">
+      <h1>Пошук зображень</h1>
+      <form id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Введіть пошуковий запит..."
+        />
+        <button type="submit">Шукати</button>
+      </form>
+      <div id="loader" class="loader"></div>
 
-      input[type='text'] {
-        width: 300px;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
+      <div id="gallery" class="gallery"></div>
+    </div>
 
-      button[type='submit'] {
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      button[type='submit']:hover {
-        background-color: #45a049;
-      }
-
-      .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-      }
-
-      .card {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        overflow: hidden;
-      }
-
-      .card img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .card span {
-        display: block;
-        padding: 5px;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      .loader {
-        text-align: center;
-        font-size: 20px;
-        margin: 20px 0;
-      }
-    </style>
-    <form id="search-form">
-      <input
-        type="text"
-        id="query"
-        placeholder="Enter your search term"
-        required
-      />
-      <button type="submit">Search</button>
-    </form>
-
-    <div class="gallery"></div>
-    <div class="loader hidden"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    
-    
+    <script src="https://cdn.jsdelivr.net/npm/izitoast/dist/js/iziToast.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplelightbox/dist/simple-lightbox.min.js"></script>
     
   </body>
 </html>
