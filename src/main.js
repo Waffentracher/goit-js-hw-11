@@ -1,6 +1,7 @@
 import { fetchImages } from './js/pixabay-api.js';
 import {
   renderImages,
+  showMessage,
   addLoader,
   removeLoader,
 } from './js/render-functions.js';
@@ -8,7 +9,7 @@ import {
 let queryValue = '';
 let isSearching = false;
 
-window.addEventListener('DOMContentLoaded', event => {
+document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('form');
   form.addEventListener('submit', handleSubmit);
 });
@@ -25,7 +26,7 @@ async function handleSubmit(event) {
   queryValue = event.target.elements.query.value.trim();
 
   if (!queryValue) {
-    console.error('Please enter a search query.');
+    showMessage('Please enter a search query.', 'warning');
     isSearching = false;
     return;
   }
@@ -37,7 +38,7 @@ async function handleSubmit(event) {
     const images = await fetchImages(queryValue);
 
     if (images.length === 0) {
-      console.warn(
+      showMessage(
         'Sorry, there are no images matching your search query. Please try again.'
       );
     } else {
