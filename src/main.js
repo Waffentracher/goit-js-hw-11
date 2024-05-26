@@ -8,13 +8,21 @@ import {
 
 window.addEventListener('DOMContentLoaded', event => {
   const form = document.querySelector('form');
-  form.addEventListener('submit', handleSubmit);
+  if (form) {
+    form.addEventListener('submit', handleSubmit);
+  }
 });
 
 async function handleSubmit(event) {
   event.preventDefault();
 
-  const queryValue = event.target.elements.query.value.trim();
+  const queryInput = event.target.elements.query;
+  if (!queryInput) {
+    showMessage('Search input not found.', 'error');
+    return;
+  }
+
+  const queryValue = queryInput.value.trim();
 
   if (!queryValue) {
     showMessage('Please enter a search query.', 'warning');
@@ -47,5 +55,7 @@ async function handleSubmit(event) {
 
 function clearGallery() {
   const gallery = document.querySelector('.gallery');
-  gallery.innerHTML = '';
+  if (gallery) {
+    gallery.innerHTML = '';
+  }
 }

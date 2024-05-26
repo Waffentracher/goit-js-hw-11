@@ -3,6 +3,11 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 function renderImages(images, append = false) {
   const gallery = document.querySelector('.gallery');
+  if (!gallery) {
+    console.error('Gallery element not found.');
+    return;
+  }
+
   const lightbox = new SimpleLightbox('.gallery a', {});
 
   if (!append) {
@@ -56,13 +61,17 @@ function showMessage(message, type = 'error') {
 
 function addLoader() {
   const loader = document.querySelector('.loader');
-  loader.textContent = 'Loading...';
-  loader.classList.remove('hidden');
+  if (loader) {
+    loader.textContent = 'Loading...';
+    loader.classList.remove('hidden');
+  }
 }
 
 function removeLoader() {
   const loader = document.querySelector('.loader');
-  loader.classList.add('hidden');
+  if (loader) {
+    loader.classList.add('hidden');
+  }
 }
 
 export { renderImages, showMessage, addLoader, removeLoader };
