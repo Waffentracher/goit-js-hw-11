@@ -18,6 +18,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/6.4.0/css-loader.min.css"
     />
   </head>
+
   <body>
     <style>
       form {
@@ -71,6 +72,22 @@
         padding: 5px;
       }
 
+      .load-more-button {
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .load-more-button:hover {
+        background-color: #45a049;
+      }
+
       .hidden {
         display: none;
       }
@@ -92,6 +109,7 @@
     </form>
 
     <div class="gallery"></div>
+    <button class="load-more-button" style="display: none">Load more</button>
     <div class="loader hidden"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
